@@ -142,3 +142,11 @@ Use a product that you registered in Settings. The request must include its exac
 4. Show a high-value request enter approval queue, then approve through the protected endpoint.
 5. With Sandbox configured, create and capture the Sandbox order; otherwise show the explicit configuration-required state.
 6. Verify the audit chain and inspect the transaction timeline.
+
+## Author
+
+Designed and developed by **Abhishek Yadav**.
+
+## License
+
+This project is released under the [MIT License](LICENSE).
