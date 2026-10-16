@@ -1,0 +1,16 @@
+{
+  "name": "ghostpermission",
+  "version": "1.0.0",
+  "description": "AI agent runtime authorization platform with sequence-aware policy enforcement.",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node server/index.js",
+    "test": "node --test server/tests/*.test.js",
+    "lint": "node --check server/index.js && node --check server/lib/env.js && node --check server/lib/engine.js && node --check server/lib/store.js && node --check server/lib/config.js && node --check server/lib/intent.js && node --check server/lib/payments.js && node --check server/lib/paypal.js && node --check public/app.js",
+    "verify": "npm run lint && npm test"
+  },
+  "keywords": ["ai-security", "authorization", "audit", "policy-engine"],
+  "author": "Abhishek Yadav",
+  "license": "MIT"
+}
