@@ -47,6 +47,38 @@ flowchart LR
 
 ![GhostPermission payment console](docs/screenshots/payment-console.png)
 
+### Authorization Lab
+
+![GhostPermission authorization lab](docs/screenshots/authorization-lab.png)
+
+### Workflow Analyzer
+
+![GhostPermission workflow analyzer](docs/screenshots/workflow-analyzer.png)
+
+### Policy Center
+
+![GhostPermission policy center](docs/screenshots/policy-center.png)
+
+### Data Flow Explorer
+
+![GhostPermission data flow explorer](docs/screenshots/data-flow-explorer.png)
+
+### Security Incidents
+
+![GhostPermission security incidents](docs/screenshots/security-incidents.png)
+
+### Audit Trail
+
+![GhostPermission audit trail](docs/screenshots/audit-trail.png)
+
+### Analytics
+
+![GhostPermission analytics](docs/screenshots/analytics.png)
+
+### Integrations
+
+![GhostPermission integrations](docs/screenshots/integrations.png)
+
 ### Real Workspace Setup
 
 ![GhostPermission settings for real workspace records](docs/screenshots/workspace-settings.png)
