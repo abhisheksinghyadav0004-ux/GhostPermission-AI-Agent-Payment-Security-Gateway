@@ -37,6 +37,20 @@ flowchart LR
 - **Auditability:** every policy, payment, workflow, incident, and approval event is stored in a SHA-256 hash chain.
 - **Honest integrations:** a missing PayPal configuration returns an explicit error; no mock payment success is shown.
 
+## Screenshots
+
+### Security Overview
+
+![GhostPermission security overview](docs/screenshots/security-overview.png)
+
+### Payment Console
+
+![GhostPermission payment console](docs/screenshots/payment-console.png)
+
+### Real Workspace Setup
+
+![GhostPermission settings for real workspace records](docs/screenshots/workspace-settings.png)
+
 ## Run locally
 
 Requirements: Node.js 18 or newer.

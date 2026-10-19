@@ -1,5 +1,5 @@
 const pages = [["overview","Security Overview"],["payments","Payment Console"],["playground","Authorization Lab"],["workflow","Workflow Analyzer"],["policies","Policy Center"],["dataflow","Data Flow Explorer"],["incidents","Security Incidents"],["audit","Audit Trail"],["analytics","Analytics"],["integrations","Integrations"],["settings","Settings"]];
-let state = null, integrations = null, page = "overview", proposal = null;
+let state = null, integrations = null, page = (location.hash || "#overview").slice(1), proposal = null;
 const app = document.querySelector("#app"), title = document.querySelector("#title");
 const h = (v) => String(v ?? "").replace(/[&<>"']/g, (c) => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[c]));
 const badge = (v) => '<span class="pill '+h(v)+'">'+h(v)+"</span>";
@@ -9,7 +9,7 @@ const metric = (k,v) => '<div class="card metric"><b>'+h(v)+"</b><span>"+h(k)+"<
 function downloadJson(name,data){const b=new Blob([JSON.stringify(data,null,2)],{type:"application/json"}),u=URL.createObjectURL(b),a=document.createElement("a");a.href=u;a.download=name;a.click();URL.revokeObjectURL(u);}
 async function api(url,options={}){const r=await fetch(url,{headers:{"Content-Type":"application/json",...(options.headers||{})},...options}),t=await r.text();let d={};try{d=t?JSON.parse(t):{}}catch{d={error:t}}if(!r.ok){const e=new Error(d.error||"Request failed");e.data=d;throw e}return d}
 async function load(){[state,integrations]=await Promise.all([api("/api/state"),api("/api/integrations/status")]);render()}
-function setPage(next){page=next;render()}
+function setPage(next){page=pages.some(([id])=>id===next)?next:"overview";history.replaceState(null,"","#"+page);render()}
 function nav(){document.querySelector("#nav").innerHTML=pages.map(([id,label])=>'<button class="nav-btn '+(page===id?"active":"")+'" data-page="'+id+'">'+label+"</button>").join("");document.querySelectorAll("[data-page]").forEach(b=>b.onclick=()=>setPage(b.dataset.page))}
 function paymentAction(t){if(["AUTHORIZED","PAYPAL_CONFIGURATION_REQUIRED","PAYPAL_ORDER_FAILED"].includes(t.status))return '<button data-paypal-order="'+h(t.id)+'">Create PayPal order</button>';if(t.status==="PAYPAL_ORDER_CREATED")return '<button data-capture="'+h(t.id)+'">Verify and capture</button>';return "-"}
 function txRows(items){return '<table class="table"><thead><tr><th>Transaction</th><th>Product</th><th>Amount</th><th>Decision</th><th>Lifecycle</th><th>Action</th></tr></thead><tbody>'+(items.map(t=>'<tr><td><b>'+h(t.id)+'</b><br><small>'+new Date(t.createdAt).toLocaleString()+'</small></td><td>'+h(t.productName||"Unvalidated request")+'<br><small>'+h(t.merchantId||"unknown")+'</small></td><td>'+(t.amountCents?money(t.amountCents,t.currency):"-")+'</td><td>'+badge(t.decision||"PENDING")+'<br><small>'+h(t.reason||"")+'</small></td><td>'+badge(t.status)+'</td><td>'+paymentAction(t)+'</td></tr>').join("")||'<tr><td colspan="6">No payment authorization requests yet.</td></tr>')+"</tbody></table>"}
